@@ -1,0 +1,40 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "vramplan"
+version = "0.1.0"
+description = "Estimate GPU VRAM for LLM inference: weights + KV cache + activations, and whether a model fits."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "Apache-2.0" }
+authors = [{ name = "zsh", email = "zhangshiheng33@163.com" }]
+keywords = ["llm", "inference", "gpu", "vram", "memory", "serving", "planning"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = []
+
+[project.optional-dependencies]
+hf = ["transformers>=4.40", "torch>=2.0"]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+vramplan = "vramplan.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/shihengzhang/vramplan"
+Repository = "https://github.com/shihengzhang/vramplan"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/vramplan"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-q"
